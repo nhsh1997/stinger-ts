@@ -24,6 +24,7 @@ applyMiddleware(middleware, router);
 applyRoutes(routes, router);
 applyMiddleware(errorMiddleware, router);
 
+
 server.listen(PORT, () =>
   console.log(`Server is running http://localhost:${PORT}...`)
 );

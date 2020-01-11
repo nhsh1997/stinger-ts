@@ -16,4 +16,11 @@ exports.handleBodyRequestParsing = (router) => {
 exports.handleCompression = (router) => {
     router.use(compression_1.default());
 };
+exports.requestLog = (router) => {
+    //Log when recieved requests and catch 404 and forward to error handler.
+    router.use((req, res, next) => {
+        console.log(`${req.method} requests for ${req.url} - ${JSON.stringify(req.body)}`);
+        next();
+    });
+};
 //# sourceMappingURL=common.js.map
