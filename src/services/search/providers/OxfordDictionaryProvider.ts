@@ -62,5 +62,6 @@ export const getWordMeanings = async (word: string) => {
     return meaningStrings;
   } catch (error) {
     console.log(error);
+    return ['Not Found'];
   }
 };

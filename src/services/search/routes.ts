@@ -9,31 +9,26 @@ export default [
     path: "/webhook",
     method: "post",
     handler: async (req: Request, res: Response) => {
-      try {
-        const entries = req.body.entry;
-        console.log(JSON.stringify(req.body));
-        for (let entry of entries) {
-          let messaging = entry.messaging;
-          for (let message of messaging) {
-            let senderId = message.sender.id;
-            if (message.message) {
-              // If user send text
-              if (message.message.text) {
-                let text = message.message.text;
-                const meanings = await getMeaningByWord(text);
-                await Promise.all(meanings.map( async (meaning: string ) => {
-                  await sendMessage(senderId, meaning);
-                }));
-              }
+      const entries = req.body.entry;
+      console.log(JSON.stringify(req.body));
+      for (let entry of entries) {
+        let messaging = entry.messaging;
+        for (let message of messaging) {
+          let senderId = message.sender.id;
+          if (message.message) {
+            // If user send text
+            if (message.message.text) {
+              let text = message.message.text;
+              const meanings = await getMeaningByWord(text);
+              await Promise.all(meanings.map( async (meaning: string ) => {
+                await sendMessage(senderId, meaning);
+              }));
             }
           }
         }
-
-        res.status(200).send("OK");
-      } catch (e) {
-        console.log(e);
-        return []
       }
+
+      res.status(200).send("OK");
     }
   },
   {

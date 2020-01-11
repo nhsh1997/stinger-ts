@@ -67,6 +67,7 @@ exports.getWordMeanings = (word) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (error) {
         console.log(error);
+        return ['Not Found'];
     }
 });
 //# sourceMappingURL=OxfordDictionaryProvider.js.map
