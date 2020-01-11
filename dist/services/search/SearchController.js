@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const OxfordDictionaryProvider_1 = require("./providers/OxfordDictionaryProvider");
 exports.getMeaningByWord = (word) => __awaiter(void 0, void 0, void 0, function* () {
     if (word.length < 3) {
-        return 'Not Found';
+        return ['Not Found'];
     }
     return yield OxfordDictionaryProvider_1.getWordMeanings(word);
 });
