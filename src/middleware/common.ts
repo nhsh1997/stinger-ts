@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import cors from 'cors';
 import compression from 'compression';
 import parser from 'body-parser';
@@ -18,7 +18,7 @@ export const handleCompression = (router: Router) => {
 
 export const requestLog = (router: Router) => {
   //Log when recieved requests and catch 404 and forward to error handler.
-  router.use((req, res, next)=>{
+  router.use((req: Request, res: Response, next: NextFunction)=>{
     console.log(`${req.method} requests for ${req.url} - ${JSON.stringify(req.body)}`);
     next();
   });
