@@ -63,6 +63,17 @@ exports.default = [
                 }
             }
         })
-    }
+    },
+    {
+        path: "/test/:word",
+        method: "get",
+        handler: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+            const word = req.params.word;
+            console.log(word);
+            const meanings = yield SearchController_1.getMeaningByWord(word);
+            console.log(meanings);
+            res.status(200).json(meanings);
+        })
+    },
 ];
 //# sourceMappingURL=routes.js.map

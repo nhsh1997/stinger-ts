@@ -10,10 +10,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const OxfordDictionaryProvider_1 = require("./providers/OxfordDictionaryProvider");
+const redis_dictionary_cache_1 = require("./cache/redis-dictionary-cache");
 exports.getMeaningByWord = (word) => __awaiter(void 0, void 0, void 0, function* () {
-    if (word.length < 3) {
+    if (word.length < 2) {
         return ['Not Found'];
     }
-    return yield OxfordDictionaryProvider_1.getWordMeanings(word);
+    let meanings = yield redis_dictionary_cache_1.getOxfordWordMeaningsFromCache(word);
+    if (meanings.length < 1) {
+        meanings = yield OxfordDictionaryProvider_1.getWordMeaningsFromOxford(word);
+        yield redis_dictionary_cache_1.setOxfordWordMeaningsCache(word, meanings);
+    }
+    return meanings;
 });
 //# sourceMappingURL=SearchController.js.map

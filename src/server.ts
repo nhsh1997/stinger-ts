@@ -9,7 +9,7 @@ const ENV = process.env.NODE_ENV || 'development';
 const envConfig = require(`./config/environments/${ENV}`).default;
 const PORT = envConfig.web.port;
 const server = http.createServer(router);
-
+import './db/redis-client';
 process.on("uncaughtException", e => {
   console.log(e);
   process.exit(1);

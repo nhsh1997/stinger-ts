@@ -47,7 +47,7 @@ const exploreWordNode = (node, results = [], func, word = null, lexicalCategory 
         func(word, results, lexicalCategory, pronunciations, node.definitions, node.examples);
     }
 };
-exports.getWordMeanings = (word) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getWordMeaningsFromOxford = (word) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const url = "https://od-api.oxforddictionaries.com/api/v2/entries/en-gb/" + word + "?fields=definitions%2Cexamples%2Cpronunciations&strictMatch=false";
         const response = yield node_fetch_1.default(url, options);

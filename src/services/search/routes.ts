@@ -59,5 +59,16 @@ export default [
         }
       }
     }
-  }
+  },
+  {
+    path: "/test/:word",
+    method: "get",
+    handler: async (req: Request, res: Response) => {
+      const word = req.params.word;
+      console.log(word);
+      const meanings = await getMeaningByWord(word);
+      console.log(meanings);
+      res.status(200).json(meanings);
+    }
+  },
 ]

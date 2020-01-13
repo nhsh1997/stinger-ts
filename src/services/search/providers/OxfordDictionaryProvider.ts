@@ -41,7 +41,7 @@ const exploreWordNode = (node: any, results = [], func: any, word = null, lexica
 };
 
 
-export const getWordMeanings = async (word: string) => {
+export const getWordMeaningsFromOxford = async (word: string) => {
   try {
     const url = "https://od-api.oxforddictionaries.com/api/v2/entries/en-gb/" + word + "?fields=definitions%2Cexamples%2Cpronunciations&strictMatch=false";
     const response = await fetch(url, options);
