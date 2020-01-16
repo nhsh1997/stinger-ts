@@ -57,7 +57,6 @@ exports.getWordMeaningsFromOxford = (word) => __awaiter(void 0, void 0, void 0, 
         exploreWordNode(json, meaningsArr, addMeaning, null, null, null);
         //converting object to be string
         const meaningStrings = meaningsArr.length > 0 && meaningsArr != null ? meaningsArr.map((meaning) => {
-            console.log(meaning);
             const pronunciation = meaning.pronunciations[0] || '';
             const examplesString = meaning.examples ? meaning.examples.reduce(((examples, item) => examples + '\n' + item.text), 'examples: ') : '';
             const message = `${meaning.word} /${pronunciation.phoneticSpelling}/ ${meaning.lexicalCategory.text}: ${meaning.definitions}\n` + examplesString;

@@ -22,4 +22,13 @@ exports.getOxfordWordMeaningsFromCache = (word) => __awaiter(void 0, void 0, voi
     const meanings = yield redis_client_1.default.lrange(key, 0, -1);
     return meanings;
 });
+exports.setOzdicWordMeaningsCache = (word, meaings) => __awaiter(void 0, void 0, void 0, function* () {
+    const key = `ozdic:${word}`;
+    yield redis_client_1.default.rpush(key, ...meaings);
+});
+exports.getOzdicWordMeaningsFromCache = (word) => __awaiter(void 0, void 0, void 0, function* () {
+    const key = `ozdic:${word}`;
+    const meanings = yield redis_client_1.default.lrange(key, 0, -1);
+    return meanings;
+});
 //# sourceMappingURL=redis-dictionary-cache.js.map

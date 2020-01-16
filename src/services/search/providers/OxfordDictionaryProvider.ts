@@ -53,7 +53,6 @@ export const getWordMeaningsFromOxford = async (word: string) => {
 
     //converting object to be string
     const meaningStrings = meaningsArr.length > 0 && meaningsArr != null ? meaningsArr.map((meaning: any) => {
-      console.log(meaning);
       const pronunciation = meaning.pronunciations[0] || '';
       const examplesString = meaning.examples ? meaning.examples.reduce(((examples: any, item: any) => examples + '\n' + item.text), 'examples: ') : '';
       const message = `${meaning.word} /${pronunciation.phoneticSpelling}/ ${meaning.lexicalCategory.text}: ${meaning.definitions}\n` + examplesString;

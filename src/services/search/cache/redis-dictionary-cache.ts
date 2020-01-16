@@ -10,3 +10,13 @@ export const getOxfordWordMeaningsFromCache = async (word: string) => {
     const meanings = await client.lrange(key, 0, -1);
     return meanings;
 };
+
+export const setOzdicWordMeaningsCache = async (word: string, meaings: string[]) => {
+    const key = `ozdic:${word}`;
+    await client.rpush(key, ...meaings);
+};
+export const getOzdicWordMeaningsFromCache = async (word: string) => {
+    const key = `ozdic:${word}`;
+    const meanings = await client.lrange(key, 0, -1);
+    return meanings;
+};

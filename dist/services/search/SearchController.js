@@ -11,14 +11,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const OxfordDictionaryProvider_1 = require("./providers/OxfordDictionaryProvider");
 const redis_dictionary_cache_1 = require("./cache/redis-dictionary-cache");
+const OzolicDictionaryProvider_1 = require("./providers/OzolicDictionaryProvider");
 exports.getMeaningByWord = (word) => __awaiter(void 0, void 0, void 0, function* () {
     if (word.length < 2) {
         return ['Not Found'];
     }
-    let meanings = yield redis_dictionary_cache_1.getOxfordWordMeaningsFromCache(word);
-    if (meanings.length < 1) {
-        meanings = yield OxfordDictionaryProvider_1.getWordMeaningsFromOxford(word);
-        yield redis_dictionary_cache_1.setOxfordWordMeaningsCache(word, meanings);
+    let meanings = [];
+    let oxfordMeanings = yield redis_dictionary_cache_1.getOxfordWordMeaningsFromCache(word);
+    if (oxfordMeanings.length < 1) {
+        oxfordMeanings = yield OxfordDictionaryProvider_1.getWordMeaningsFromOxford(word);
+        yield redis_dictionary_cache_1.setOxfordWordMeaningsCache(word, oxfordMeanings);
+    }
+    if (oxfordMeanings[0] !== 'Not Found') {
+        meanings = meanings.concat(oxfordMeanings);
+    }
+    let ozdicMeanings = yield redis_dictionary_cache_1.getOzdicWordMeaningsFromCache(word);
+    if (ozdicMeanings.length < 1) {
+        ozdicMeanings = yield OzolicDictionaryProvider_1.getWordMeaningsFromOzdic(word);
+        yield redis_dictionary_cache_1.setOzdicWordMeaningsCache(word, ozdicMeanings);
+    }
+    if (ozdicMeanings[0] !== 'Not Found') {
+        meanings = meanings.concat(ozdicMeanings);
+    }
+    if (meanings.length == 0) {
+        meanings = ['Not Found'];
     }
     return meanings;
 });
