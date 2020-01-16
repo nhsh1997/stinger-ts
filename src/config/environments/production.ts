@@ -6,6 +6,6 @@ export default {
     verify_token: 'hello'
   },
   facebook: {
-    access_token: 'EAAKGvj8GdMIBAAfbc7ScZAOyKkAFAwYU0rGmXSzWu8ExbtLGcQwFDvZBUxmOxLEnTGc6TcjmTRsmSjSGZBjdA0BZA5lj9yErddbKEc7ZCZBYN4J1glp77GZAVEqvLFGa7jvBNZBL1bMbRKQKUaSpEJmvdD1nCXKW324hhzOoUZAHkTnVOc7moz450'
+    access_token: 'EAAKGvj8GdMIBAOZBfRBxDXVQ3tnwOZCZCoVHXNbG9jjes6XtSrJEERo1QFGb61JnyHWcwfTmEeZCYRKWh3lnCnmyCS0vqZCcMX36bqZCr0Pm4oR99NxK2ZAqhKIpGK2ZCnD2p1c7m80ZAJWRYmugWkGzoWWDiLB3ZArgqYP4WyUNstX12VwDaRT77T'
   }
 }
