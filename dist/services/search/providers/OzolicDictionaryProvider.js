@@ -51,53 +51,63 @@ const mappingMeaningToString = (meanings) => {
     return meaningStrings;
 };
 const parseMeaningFromHTML = (text) => {
-    let $ = cheerio.load(text);
-    const items = $('.item');
-    if (items.length < 1) {
+    try {
+        let $ = cheerio.load(text);
+        const items = $('.item');
+        if (items.length < 1) {
+            return [];
+        }
+        let meanings = [];
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const itemChildrens = item.children;
+            let word;
+            let lexicalCategory;
+            let classes = [];
+            let current = itemChildrens[0];
+            word = current.children[0].children[0].data;
+            lexicalCategory = current.children[1].children[0].data;
+            for (let childrenIndex = 1; childrenIndex < itemChildrens.length; childrenIndex++) {
+                const wordClass = getWordClassess(itemChildrens[childrenIndex]);
+                if (wordClass.length !== 0) {
+                    classes = classes.concat(wordClass);
+                }
+            }
+            const result = {
+                word,
+                lexicalCategory,
+                classes
+            };
+            meanings.push(result);
+        }
+        return meanings;
+    }
+    catch (e) {
         return [];
     }
-    let meanings = [];
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        const itemChildrens = item.children;
-        let word;
-        let lexicalCategory;
-        let classes = [];
-        let current = itemChildrens[0];
-        word = current.children[0].children[0].data;
-        lexicalCategory = current.children[1].children[0].data;
-        for (let childrenIndex = 1; childrenIndex < itemChildrens.length; childrenIndex++) {
-            const wordClass = getWordClassess(itemChildrens[childrenIndex]);
-            if (wordClass.length !== 0) {
-                classes = classes.concat(wordClass);
-            }
-        }
-        const result = {
-            word,
-            lexicalCategory,
-            classes
-        };
-        meanings.push(result);
-    }
-    return meanings;
 };
 const getWordClassess = (wordClassBranch) => {
-    let classes = [];
-    if (wordClassBranch.children) {
-        let wordClassBranchChildrens = wordClassBranch.children;
-        wordClassBranchChildrens = wordClassBranchChildrens.filter((children) => {
-            return children.data !== ' ';
-        });
-        const wordClassName = wordClassBranchChildrens[0].children[0].data;
-        const wordsAndExamples = [];
-        for (let i = 1; i < wordClassBranchChildrens.length; i++) {
-            wordsAndExamples.push(wordClassBranchChildrens[i].children[0].data);
+    try {
+        let classes = [];
+        if (wordClassBranch.children) {
+            let wordClassBranchChildrens = wordClassBranch.children;
+            wordClassBranchChildrens = wordClassBranchChildrens.filter((children) => {
+                return children.data !== ' ';
+            });
+            const wordClassName = wordClassBranchChildrens[0].children[0].data;
+            const wordsAndExamples = [];
+            for (let i = 1; i < wordClassBranchChildrens.length; i++) {
+                wordsAndExamples.push(wordClassBranchChildrens[i].children[0].data);
+            }
+            classes.push({
+                name: wordClassName,
+                wordsAndExamples
+            });
         }
-        classes.push({
-            name: wordClassName,
-            wordsAndExamples
-        });
+        return classes;
     }
-    return classes;
+    catch (e) {
+        return [];
+    }
 };
 //# sourceMappingURL=OzolicDictionaryProvider.js.map
