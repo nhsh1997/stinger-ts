@@ -6,7 +6,7 @@ export default {
     verify_token: 'hello'
   },
   facebook: {
-    access_token: 'EAAKGvj8GdMIBAAZAKpZCo5V7G9MPZBJeGgamkgW94efUZCXK3V0LDTiBZCrOZBSVLdz3uoC4v7QBpoVIEoS9RQCbEI4EV1aAbdKzfIVZBBxrhz3NkxbdF8oTTRWOAugZBuZCrSuro0nnP8xXPpZCxKyMx5kD1bQgj9XE3AAmXjxF3fsohfJIVDBSZBj'
+    access_token: 'EAAKGvj8GdMIBACaayOEjwnlW6IejZA0DzltWS3G4pgQzKfJlT3SmtogA8xBZAoufhvvMseX27wOZBF7CT1LXpO9guHuRHyohMj1Xd5dwj6gDUeodHEZAhqCUKc8WYBS8sI8rZBBzGTVUmFgfj2YE5bPZBEmyY63oBrsLyowOBsAqDZBFiIoG9lq'
   },
   redis: {
     read: {
