@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 const ENV = process.env.NODE_ENV || 'development';
-const envConfig = require(`../config/environments/${ENV}`).default;
+const envConfig = require(`../../../config/environments/${ENV}`).default;
 const app_id = envConfig.oxford.app_id; // insert your APP Id
 const app_key =  envConfig.oxford.app_key; // insert your APP Key
 
