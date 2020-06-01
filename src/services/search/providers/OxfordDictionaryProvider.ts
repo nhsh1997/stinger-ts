@@ -1,9 +1,9 @@
 import fetch from "node-fetch";
 
-const app_id = "fcee0c15"; // insert your APP Id
-const app_key = "dc320802eff7c3e8ef9cfd26ece6583a"; // insert your APP Key
-const fields = "definitions%2Cexamples%2Cpronunciations";
-const strictMatch = "false";
+const ENV = process.env.NODE_ENV || 'development';
+const envConfig = require(`../config/environments/${ENV}`).default;
+const app_id = envConfig.oxford.app_id; // insert your APP Id
+const app_key =  envConfig.oxford.app_key; // insert your APP Key
 
 
 const options = {
@@ -27,10 +27,10 @@ const exploreWordNode = (node: any, results = [], func: any, word = null, lexica
     node.results.forEach((result: any) => exploreWordNode(result, results, func, word = node.word, lexicalCategory, pronunciations)) ;
   }
   if(node.lexicalEntries && node.lexicalEntries.length) {
-    node.lexicalEntries.forEach((lexicalEntry: any) => exploreWordNode(lexicalEntry, results, func, word, lexicalCategory = lexicalEntry.lexicalCategory, pronunciations = lexicalEntry.pronunciations))
+    node.lexicalEntries.forEach((lexicalEntry: any) => exploreWordNode(lexicalEntry, results, func, word, lexicalCategory = lexicalEntry.lexicalCategory, pronunciations))
   }
   if(node.entries && node.entries.length){
-    node.entries.forEach((entry: any) => exploreWordNode(entry, results, func, word, lexicalCategory, pronunciations));
+    node.entries.forEach((entry: any) => exploreWordNode(entry, results, func, word, lexicalCategory, pronunciations  = entry.pronunciations));
   }
   if(node.senses && node.senses.length){
     node.senses.forEach((sense: any) => exploreWordNode(sense, results, func, word, lexicalCategory, pronunciations));

@@ -66,13 +66,10 @@ export default [
     method: "get",
     handler: async (req: Request, res: Response) => {
       const word = req.params.word;
-      console.log(word);
       const meanings = await getMeaningByWord(word);
       const results = await Promise.all(meanings.map( async (meaning: string ) => {
         return await sendMessage("100003051757638", meaning);
       }));
-      console.log(results);
-      console.log(meanings);
       res.status(200).json(meanings);
     }
   },
