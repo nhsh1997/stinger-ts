@@ -8,7 +8,11 @@ exports.default = {
         verify_token: 'hello'
     },
     facebook: {
-        access_token: 'EAAKGvj8GdMIBACaayOEjwnlW6IejZA0DzltWS3G4pgQzKfJlT3SmtogA8xBZAoufhvvMseX27wOZBF7CT1LXpO9guHuRHyohMj1Xd5dwj6gDUeodHEZAhqCUKc8WYBS8sI8rZBBzGTVUmFgfj2YE5bPZBEmyY63oBrsLyowOBsAqDZBFiIoG9lq'
+        access_token: 'EAAKGvj8GdMIBACtvg5yrBbv9Pmh2hAbp6jbH4DGo3YoWFeZCjx0dy48mTcnzIpmOffL8a4JijeL0x3bUpxOZCNBmxpUWS1IsRMZA5gmlx1eNyEIMQ6tWlZBTNXM04iKjKD7VAKISWVPM2ZC9XgIg18rKPs0FX6Ho2SnQt2kdApvxA4sBJES0J'
+    },
+    oxford: {
+        app_id: 'fcee0c15',
+        app_key: 'dc320802eff7c3e8ef9cfd26ece6583a'
     },
     redis: {
         read: {

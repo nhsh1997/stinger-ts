@@ -24,6 +24,7 @@ exports.default = [
                 let messaging = entry.messaging;
                 for (let message of messaging) {
                     let senderId = message.sender.id;
+                    console.log(senderId);
                     if (message.message) {
                         // If user send text
                         if (message.message.text) {
@@ -69,9 +70,10 @@ exports.default = [
         method: "get",
         handler: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             const word = req.params.word;
-            console.log(word);
             const meanings = yield SearchController_1.getMeaningByWord(word);
-            console.log(meanings);
+            const results = yield Promise.all(meanings.map((meaning) => __awaiter(void 0, void 0, void 0, function* () {
+                return yield FBMessagingProvider_1.sendMessage("100003051757638", meaning);
+            })));
             res.status(200).json(meanings);
         })
     },
